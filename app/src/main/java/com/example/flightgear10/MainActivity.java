@@ -3,7 +3,7 @@ package com.example.flightgear10;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
+//test
 public class MainActivity extends AppCompatActivity {
 
     @Override
