@@ -100,6 +100,30 @@ public class FGVM extends BaseObservable {
         return (model.port);
 
     }
+
+    @Bindable
+    public String getAileron() {
+        return model.aileron;
+    }
+
+    public void setAileron( String aileron) {
+        model.setAileron(aileron);
+        notifyPropertyChanged(BR.aileron);
+    }
+
+    @Bindable
+    public String getElevator() {
+        return model.elevator;
+    }
+
+    public void setElevator( String elevator) {
+        model.setElevator(elevator);
+        notifyPropertyChanged(BR.elevator);
+    }
+
+
+
+
     public FGVM() {
 
         // instantiating object of

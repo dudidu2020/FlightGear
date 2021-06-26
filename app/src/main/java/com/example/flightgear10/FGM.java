@@ -11,7 +11,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class FGM {
     @Nullable
-    String address,port;
+    String address,port,aileron,elevator;
     int throttle,rudder;
 
     BlockingDeque<Runnable> dispatchQueue=new LinkedBlockingDeque<Runnable>();
@@ -27,6 +27,7 @@ public class FGM {
             new Thread(new Runnable() {
                 public void run() {
                     while (true) {
+                       addInput();
 
                         try {
 
@@ -41,12 +42,15 @@ public class FGM {
         dispatchQueue.add(new Runnable() {
             @Override
             public void run() {
-                System.out.println("11111");
+
                 try {
                     Socket fg = new Socket(address, Integer.parseInt(port));
-                    System.out.println("11112");
+
                     out = new PrintWriter(fg.getOutputStream(), true);
-                    System.out.println("11113");
+
+
+                        out.flush();
+
 
                 } catch (IOException e) { }
             }});}
@@ -57,17 +61,26 @@ public class FGM {
             @Override
             public void run() {
 
-                if(out!=null)
-                {
 
-                    out.print("set /controls/flight/aileron " + Integer.toString(0) + "\r\n");
-                    out.print("set /controls/flight/elevator " + Integer.toString(0) + "\r\n");
-                    out.print("set /controls/flight/rudder " + rudder + "\r\n");
-                    out.print("set /controls/flight/current-engine/throttle " + throttle + "\r\n");
-                    out.flush();
+                    float t=(float) throttle;
+                    float t1=t/100;
+                    float r=(float) rudder;
+                    float r0=2*r-100;
+                    float r1=r0/100;
+                    System.out.println(t1);
+
+                        out.print("set /controls/flight/aileron " + Float.parseFloat(aileron) + "\r\n");
+                        out.flush();
+                        out.print("set /controls/flight/elevator " + Float.parseFloat(elevator) + "\r\n");
+                        out.flush();
+                        out.print("set /controls/flight/rudder " + r1 + "\r\n");
+                        out.flush();
+                        out.print("set /controls/engines/current-engine/throttle " + t1 + "\r\n");
+                        out.flush();
+
                     //192.168.7.67
-                    //79.180.2.71
-                }
+                    //10.0.0.9
+
             }
         });
     }
@@ -121,7 +134,23 @@ public class FGM {
         this.rudder = rudder;
     }
 
+    @Nullable
+    public String getAileron() {
+        return aileron;
+    }
 
+    public void setAileron(@Nullable String aileron) {
+        this.aileron = aileron;
+    }
+
+    @Nullable
+    public String getElevator() {
+        return elevator;
+    }
+
+    public void setElevator(@Nullable String elevator) {
+        this.elevator = elevator;
+    }
 
 
 
