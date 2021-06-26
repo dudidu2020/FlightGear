@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Flight Gear 1.0</string>
+    <string name="app_name">Flight Gear Connect</string>
+    <string name="heading">Control Screen</string>
+    <string name="address_hint">Enter Your IP</string>
+    <string name="port_hint">Enter Port</string>
+    <string name="button_text">Connect</string>
 </resources>

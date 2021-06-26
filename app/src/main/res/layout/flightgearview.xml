@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <!-- binding object of ViewModel to the XML layout -->
+    <data>
+        <variable
+            name="flightgearviewmodel"
+            type="com.example.flightgear10.FGVM" />
+    </data>
+
+    <!-- Provided Linear layout for the activity components -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:background="#168BC34A"
+        android:orientation="vertical">
+
+        <!-- TextView for the heading of the activity -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/heading"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <!-- EditText field for the Email -->
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/address_hint"
+            android:inputType="text"
+            android:padding="8dp"
+            android:text="@={flightgearviewmodel.address}" />
+
+        <!-- EditText field for the password -->
+        <EditText
+            android:id="@+id/port"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/port_hint"
+            android:inputType="text"
+            android:padding="8dp"
+            android:text="@={flightgearviewmodel.port}" />
+
+        <!-- Login Button of the activity -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="20dp"
+            android:background="#4CAF50"
+
+            android:onClick="@{()-> flightgearviewmodel.onButtonClicked()}"
+            android:text="@string/button_text"
+
+            android:textSize="30sp"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold"
+            bind:toastMessage="@{flightgearviewmodel.toastMessage}" />
+
+        <SeekBar
+            android:id="@+id/rudder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_centerInParent="true"
+            android:progress="@={flightgearviewmodel.rudder}"
+            android:rotation="0" />
+
+
+        <SeekBar
+            android:id="@+id/throttle"
+            android:layout_width="127dp"
+            android:layout_height="296dp"
+            android:layout_below="@+id/rudder"
+            android:layout_gravity="left"
+            android:progress="@={flightgearviewmodel.throttle}"
+            android:rotation="270" />
+
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="135dp" />
+
+    </LinearLayout>
+</layout>
