@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/tools"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
 
-<!-- binding object of ViewModel to the XML layout -->
+    <!-- binding object of ViewModel to the XML layout -->
     <data>
+
         <variable
             name="flightgearviewmodel"
             type="com.example.flightgear10.FGVM" />
@@ -71,64 +71,65 @@
             android:onClick="@{()-> flightgearviewmodel.onButtonClicked()}"
             android:text="@string/button_text"
 
-            android:textSize="30sp"
             android:textColor="@android:color/holo_green_dark"
+            android:textSize="30sp"
             android:textStyle="bold"
-            bind:toastMessage="@{flightgearviewmodel.toastMessage}" />
+            />
 
         <SeekBar
             android:id="@+id/rudder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="60dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
-            android:layout_centerInParent="true"
             android:progress="@={flightgearviewmodel.rudder}"
             android:rotation="0" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_margin="8dp"
-        android:background="#168BC34A"
-        android:orientation="horizontal">
-        <SeekBar
-            android:id="@+id/throttle"
-            android:layout_width="127dp"
-            android:layout_height="268dp"
-            android:layout_below="@+id/rudder"
-            android:layout_gravity="left"
-            android:progress="@={flightgearviewmodel.throttle}"
-            android:rotation="270" />
-
-        <com.example.flightgear10.JSV
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="225dp"
-            android:id="@+id/joystick"
-            />
-        <TextView
-            android:id="@+id/aileron"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:text="@={flightgearviewmodel.aileron}" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="#168BC34A"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/elevator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:text="@={flightgearviewmodel.elevator}" />
+            <SeekBar
+                android:id="@+id/throttle"
+                android:layout_width="127dp"
+                android:layout_height="268dp"
+                android:layout_below="@+id/rudder"
+                android:layout_gravity="left"
+                android:progress="@={flightgearviewmodel.throttle}"
+                android:rotation="270" />
 
-    </LinearLayout>
+            <com.example.flightgear10.JSV
+                android:id="@+id/joystick"
+                android:layout_width="match_parent"
+                android:layout_height="225dp" />
+
+            <TextView
+                android:id="@+id/aileron"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={flightgearviewmodel.aileron}"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/elevator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={flightgearviewmodel.elevator}"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
 </layout>

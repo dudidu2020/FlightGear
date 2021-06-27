@@ -11,34 +11,35 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class FGM {
     @Nullable
-    String address,port,aileron,elevator;
-    int throttle,rudder;
+    String address, port, aileron, elevator;
+    int throttle, rudder;
 
-    BlockingDeque<Runnable> dispatchQueue=new LinkedBlockingDeque<Runnable>();
-    PrintWriter out=null;
+    BlockingDeque<Runnable> dispatchQueue = new LinkedBlockingDeque<Runnable>();
+    PrintWriter out = null;
 
     public void connect() {
 
 
         firstConnection();
 
-            addInput();
+        addInput();
 
-            new Thread(new Runnable() {
-                public void run() {
-                    while (true) {
-                       addInput();
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    //addInput();
 
-                        try {
+                    try {
 
-                            dispatchQueue.take().run();
-                        } catch (InterruptedException e) {}
+                        dispatchQueue.take().run();
+                    } catch (InterruptedException e) {
                     }
                 }
-            }).start();
-        }
+            }
+        }).start();
+    }
 
-    void firstConnection()     {
+    void firstConnection() {
         dispatchQueue.add(new Runnable() {
             @Override
             public void run() {
@@ -49,11 +50,14 @@ public class FGM {
                     out = new PrintWriter(fg.getOutputStream(), true);
 
 
-                        out.flush();
+                    out.flush();
 
 
-                } catch (IOException e) { }
-            }});}
+                } catch (IOException e) {
+                }
+            }
+        });
+    }
 
 
     void addInput() {
@@ -62,29 +66,31 @@ public class FGM {
             public void run() {
 
 
-                    float t=(float) throttle;
-                    float t1=t/100;
-                    float r=(float) rudder;
-                    float r0=2*r-100;
-                    float r1=r0/100;
-                    System.out.println(t1);
+                float t = (float) throttle;
+                float t1 = t / 100;
+                float r = (float) rudder;
+                float r0 = 2 * r - 100;
+                float r1 = r0 / 100;
 
-                        out.print("set /controls/flight/aileron " + Float.parseFloat(aileron) + "\r\n");
-                        out.flush();
-                        out.print("set /controls/flight/elevator " + Float.parseFloat(elevator) + "\r\n");
-                        out.flush();
-                        out.print("set /controls/flight/rudder " + r1 + "\r\n");
-                        out.flush();
-                        out.print("set /controls/engines/current-engine/throttle " + t1 + "\r\n");
-                        out.flush();
+                if (aileron != null) {
+                    out.print("set /controls/flight/aileron " + Float.parseFloat(aileron) + "\r\n");
+                    out.flush();
+                }
+                if (elevator != null) {
+                    out.print("set /controls/flight/elevator " + -1 * Float.parseFloat(elevator) + "\r\n");
+                    out.flush();
+                }
 
-                    //192.168.7.67
-                    //10.0.0.9
+                out.print("set /controls/flight/rudder " + r1 + "\r\n");
+                out.flush();
+
+                out.print("set /controls/engines/current-engine/throttle " + t1 + "\r\n");
+                out.flush();
+
 
             }
         });
     }
-
 
 
     // constructor to initialize
@@ -117,7 +123,7 @@ public class FGM {
     }
 
     @Nullable
-        public int getThrottle() {
+    public int getThrottle() {
         return throttle;
     }
 
@@ -151,7 +157,6 @@ public class FGM {
     public void setElevator(@Nullable String elevator) {
         this.elevator = elevator;
     }
-
 
 
 }
