@@ -6,4 +6,4 @@ This project uses the MVVM structure, the view (layout file and a Java file) is 
 
 The UML file which represents the connection between the different structures in the project is available via this link: https://github.com/dudidu2020/FlightGear/blob/master/Flight-converted.pdf
 
-Link to the video that explains further about the project:
+Link to the video that explains further about the project: https://youtu.be/bOzK_Sw5zSc
