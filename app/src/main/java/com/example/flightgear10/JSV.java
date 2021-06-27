@@ -108,7 +108,7 @@ public class JSV extends SurfaceView implements SurfaceHolder.Callback, View.OnT
         void onJoystickMoved(float x, float y, int id);
     }
 
-    public void draw(float y, float x) {
+    public void draw(float x, float y) {
         if (getHolder().getSurface().isValid()) {
             Canvas canvas = this.getHolder().lockCanvas();
             Paint painter = new Paint();

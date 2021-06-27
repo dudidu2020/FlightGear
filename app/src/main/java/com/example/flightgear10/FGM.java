@@ -77,7 +77,7 @@ public class FGM {
                     out.flush();
                 }
                 if (elevator != null) {
-                    out.print("set /controls/flight/elevator " + -1 * Float.parseFloat(elevator) + "\r\n");
+                    out.print("set /controls/flight/elevator " + -1* Float.parseFloat(elevator) + "\r\n");
                     out.flush();
                 }
 
